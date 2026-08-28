@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated IEEE Transactions on Robotics paper."
+title: "L1AFO-Kinova"
+type: software
+authors:
+  - family-names: "Lee"
+    given-names: "Young Bin"
+  - family-names: "Yun"
+    given-names: "Tae Ho"
+  - family-names: "Kim"
+    given-names: "Min Jun"
+preferred-citation:
+  type: article
+  title: "Extreme High-Gain Friction Observer of Flexible Joint Robots With L1 Adaptive Framework"
+  authors:
+    - family-names: "Lee"
+      given-names: "Young Bin"
+    - family-names: "Yun"
+      given-names: "Tae Ho"
+    - family-names: "Kim"
+      given-names: "Min Jun"
+  journal: "IEEE Transactions on Robotics"
+  volume: 42
+  start: 2087
+  end: 2106
+  year: 2026
+  doi: "10.1109/TRO.2026.3686177"

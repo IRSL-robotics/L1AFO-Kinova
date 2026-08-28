@@ -1,0 +1,46 @@
+# ROS 2 build artifacts
+build/
+install/
+log/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Experimental data and results
+kinova_controller/ral_data/
+kinova_controller/tro_data/
+data/raw/
+results/
+*.bag
+*.db3
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Compiled binaries and libraries
+*.a
+*.so
+*.so.*
+*.o
+
+# Locally installed third-party dependencies
+third_party/
+kinova_controller/include/kortex_api/
+kinova_controller/include/mujoco-*/
+kinova_controller/lib/kortex_api/
+
+# Runtime output
+core
+core.*
+*.log

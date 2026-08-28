@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>kinova_controller</name>
+  <version>0.1.0</version>
+  <description>L1AFO torque controller for the Kinova Gen3.</description>
+  <maintainer email="dbsxogh00@kaist.ac.kr">Tae Ho Yun</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>robot_state_msgs</depend>
+  <depend>ament_index_cpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>rclcpp_components</depend>
+  <depend>lifecycle_msgs</depend>
+  <depend>controller_interface_msgs</depend>
+  <depend>eigen</depend>
+  <depend>pinocchio</depend>
+  <depend>yaml-cpp</depend>
+  <depend>boost</depend>
+  <exec_depend>robot_model</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>rclcpp_lifecycle</test_depend>
+  <test_depend>rclcpp_components</test_depend>
+  <test_depend>lifecycle_msgs</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

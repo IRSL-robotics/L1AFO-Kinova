@@ -1,0 +1,170 @@
+# Real Robot configuration
+# Set these values before running on real hardware.
+gen3_ip: ""
+
+# simulation Robot configuration
+is_simulation: true
+
+# Paths relative to the robot_model package share directory
+mujoco_xml_path: "kinova_gen3/mujoco_model/kinova_gen3.xml"
+
+simulation:
+  joint_axis: [2,2,2,2,2,2,2]
+  theta_init: [0, 0.386, 0.0, 2.29, 0, -1.07, 0]
+
+# Path relative to the robot_model package share directory
+pinocchio_urdf_path: "kinova_gen3/pinocchio_model/pinocchio_urdf/kinova_conti.urdf"
+
+lpf_tau_j_cutoff_freq: 100.0 #[Hz]
+lpf_dq_cutoff_freq: 500.0 #[Hz]
+is_rigid: true
+dt: 0.001 # 1ms controller update rate
+
+################################
+### Controller Configuration ###
+################################
+init_controller: "TASK_NRIC" # JOINT_NRIC, JOINT_PD, TASK_NRIC, TASK_PD, GRAVITY_COMPENSATION, JOINT_PD_FRIC, TASK_PD_FRIC
+joint_stiffness: [8000,8000,8000,8000,7000,7000,7000]
+rotor_inertia: [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+is_controller_logging: true
+
+########################
+### Controller Gains ###
+########################
+# JOINT_PD: u = Kp(qd - q) + Kd(qd_dot - q_dot)
+joint_pd_gains:
+  Kp: [100.0, 100.0, 100.0, 100.0, 70.0, 70.0, 70.0]
+  Kd: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  verbose: false
+
+joint_nric_gains:
+  k1: [8.0, 8.0, 8.0, 8.0, 5.0, 5.0, 5.0] # d-gain
+  k2: [21.0, 21.0, 21.0, 21.0, 13.0, 13.0, 13.0] # p-gain
+  K: [30.0, 30.0, 30.0, 30.0, 20.0, 20.0, 20.0]
+  Kp: [13.0, 13.0, 13.0, 13.0, 8.0, 8.0, 8.0]
+  Ki: [4.0, 4.0, 4.0, 4.0, 2.0, 2.0, 2.0]
+  gamma: [4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0]
+  reflected_inertia: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  verbose: false
+
+task_pd_gains:
+  Kp: [150.0, 150.0, 150.0, 50.0, 50.0, 50.0]
+  Kd: [30.0, 30.0, 30.0, 10.0, 11.0, 10.0]
+  verbose: false
+
+task_nric_gains:
+  k1: [8.0, 8.0, 8.0, 1.0, 1.0, 1.0] # d-gain
+  k2: [21.0, 21.0, 21.0, 5.0, 5.0, 5.0] # p-gain
+  K: [30.0, 30.0, 30.0, 30.0, 20.0, 20.0, 20.0]
+  Kp: [13.0, 13.0, 13.0, 13.0, 8.0, 8.0, 8.0]
+  Ki: [4.0, 4.0, 4.0, 4.0, 2.0, 2.0, 2.0]
+  gamma: [4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0]
+  reflected_inertia: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  verbose: false
+
+joint_fric_gains:
+  Kp: [50.0, 50.0, 50.0, 50.0, 30.0, 30.0, 30.0]
+  Kd: [3.0, 3.0, 3.0, 3.0, 2.0, 2.0, 2.0]
+  # Kp: [500.0, 500.0, 500.0, 500.0, 300.0, 300.0, 300.0]
+  # Kd: [30.0, 30.0, 30.0, 30.0, 20.0, 20.0, 20.0]
+  joint_stiffness_matrix : [8000, 8000, 8000, 8000, 7000, 7000, 7000]
+  torque_interface: "IMPLICIT_L1_FRIC" # FIRST_ORDER_FRIC | SECOND_ORDER_FRIC | THIRD_ORDER_FRIC | INERTIA_RESHAPING | L1_FRIC | IMPLICIT_L1_FRIC | COULOMB_OBSERVER | ASYM_FRICTION | STATIC_FRICTION
+  verbose: false
+
+task_fric_gains:
+  Kp: [1000.0, 500.0, 500.0, 5.0, 5.0, 5.0]
+  Kd: [80.0, 80.0, 80.0, 2.0, 2.0, 2.0]
+  joint_stiffness_matrix : [8000, 8000, 8000, 8000, 7000, 7000, 7000]
+  torque_interface: "IMPLICIT_L1_FRIC" # FIRST_ORDER_FRIC | SECOND_ORDER_FRIC | THIRD_ORDER_FRIC | INERTIA_RESHAPING | L1_FRIC | IMPLICIT_L1_FRIC | COULOMB_OBSERVER | ASYM_FRICTION | STATIC_FRICTION
+  verbose: false
+
+# For torque control interface
+first_order_fric_gain:
+  L : [0, 0, 0, 0, 0, 0, 0]
+  motor_inertia_matrix : [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+  verbose: false
+
+second_order_fric_gain:
+  # L : [70, 70, 70, 70, 60, 60, 60] # joint space
+  # Lp : [30, 30, 30, 30, 20, 20, 20]
+  L : [90, 90, 90, 90, 80, 80, 80] # task space
+  Lp : [30, 30, 30, 30, 20, 20, 20]
+  motor_inertia_matrix : [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+  verbose: false
+  
+third_order_fric_gain:
+  L : [100, 100, 100, 100, 100, 100, 100]
+  Lp : [40, 40, 40, 40, 40, 40, 40]
+  Li: [40, 40, 40, 40, 40, 40, 40]
+  motor_inertia_matrix : [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+  verbose: false
+
+inertia_reshaping_gain:
+  motor_inertia_matrix : [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+  desired_motor_inertia: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+  verbose: false
+
+l1_fric_gain:
+  As : [-5, -5, -5, -5, -5, -5, -5]
+  Gamma : [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+  W : [100, 100, 100, 100, 80, 80, 80]
+  motor_inertia_matrix : [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+  verbose: false
+
+implicit_l1_fric_gain:
+  Gamma : [5000, 5000, 5000, 5000, 5000, 5000, 5000]
+  Gamma_p : [500, 500, 500, 500, 500, 500, 500]
+  W : [120, 120, 120, 120, 100, 100, 100]
+  motor_inertia_matrix : [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+  verbose: false  
+
+coulomb_observer_gain:
+  K : [10, 10, 10, 10, 10, 10, 10]
+  L : [1, 1, 1, 1, 1, 1, 1]
+  motor_inertia_matrix : [0.4, 0.4, 0.4, 0.4, 0.2, 0.2, 0.2]
+  verbose: false
+
+asym_friction_gain:
+  # Robot-specific parameters: replace every [] with a seven-element vector
+  # obtained by offline identification before selecting ASYM_FRICTION.
+  f_v1_p: []
+  f_v1_n: []
+  f_v2_p: []
+  f_v2_n: []
+  f_v3_p: []
+  f_v3_n: []
+  f_s_p: []
+  f_s_n: []
+  f_c_p: []
+  f_c_n: []
+  qdot_s_p: []
+  qdot_s_n: []
+  qdot_c_p: []
+  qdot_c_n: []
+  delta_s_p: []
+  delta_s_n: []
+  delta_c_p: []
+  delta_c_n: []
+  f_l1_p: []
+  f_l1_n: []
+  f_l2_p: []
+  f_l2_n: []
+  f_l3_p: []
+  f_l3_n: []
+  f_l4_p: []
+  f_l4_n: []
+  f_T1: []
+  f_T2: []
+  f_T3: []
+  f_T4: []
+  mu: []
+  verbose: false
+
+static_friction_gain:
+  # Robot-specific parameters: replace every [] with a seven-element vector
+  # obtained by offline identification/tuning before selecting STATIC_FRICTION.
+  Fc: []
+  Fv1: []
+  Fv2: []
+  friction_compensation_weights: []
+  verbose: false
